@@ -1,10 +1,10 @@
 # transhls.js
 
-**transhls.js** (short for _transcoded_ HLS.js) is a small addition to the HLS.js library that allows for interception of .ts video data and its transcoding into different formats via ffmpeg.wasm.
+**transhls.js** (short for _transcoded_ HLS.js) is a small addition to the HLS.js library that allows for interception of .ts video data and its conversion into different formats via ffmpeg.wasm.
 
 # usage
 
-the fork was mainly created to be used in the [catavc](https://nedoxff.github.io/projects/catavc) project for transocing HEVC video to AVC. **it is not recommended to use this fork in other projects, because it will be neither maintained nor supported in the future. it's lacks many features to be a proper library and is thus considered a bodge.**
+the fork was mainly created to be used in the [catavc](https://nedoxff.github.io/projects/catavc) project for transcoding HEVC video to AVC. **it is not recommended to use this fork in other projects, because it will be neither maintained nor be assisted with. it lacks many features of a proper library and is considered a bodge.**
 
 to use transhls.js, you need to pass additional arguments to the `Hls` object constructor:
 
