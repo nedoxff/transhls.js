@@ -21,7 +21,6 @@ hls = new Hls({
     loadFfmpeg: internalLoadFfmpeg,
     // not used or implemented.
     fallbackVideoUrl: undefined,
-
     // should the audio be enabled on startup?
     initialEnableAudio: true,
     // initial quality of the video
