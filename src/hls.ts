@@ -41,6 +41,7 @@ import type BaseStreamController from './controller/base-stream-controller';
 import type ContentSteeringController from './controller/content-steering-controller';
 import type ErrorController from './controller/error-controller';
 import type FPSController from './controller/fps-controller';
+import { TranscoderPlugin } from './plugins/transcoder-plugin';
 
 /**
  * The `Hls` class is the core of the HLS.js library used to instantiate player instances.
@@ -48,6 +49,8 @@ import type FPSController from './controller/fps-controller';
  */
 export default class Hls implements HlsEventEmitter {
   private static defaultConfig: HlsConfig | undefined;
+
+  public readonly transcoder: TranscoderPlugin;
 
   /**
    * The runtime configuration used by the player. At instantiation this is combination of `hls.userConfig` merged over `Hls.DefaultConfig`.
@@ -156,6 +159,13 @@ export default class Hls implements HlsEventEmitter {
       logger,
     ));
     this.userConfig = userConfig;
+
+    if (userConfig.transcoderPluginOptions === undefined) {
+      throw new Error(
+        'transhls cannot be initialized without transcoderPluginOptions',
+      );
+    }
+    this.transcoder = new TranscoderPlugin(userConfig.transcoderPluginOptions);
 
     if (config.progressive) {
       enableStreamingMode(config, logger);

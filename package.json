@@ -36,6 +36,7 @@
     "build:debug": "rollup --config --configType full --configType demo",
     "build:watch": "rollup --config --configType full --configType demo --watch",
     "build:types": "tsc --build tsconfig-lib.json && api-extractor run --local",
+    "bac": "rollup --config --configType lightMin && powershell -command \"copy-item dist/* D:/Projects/WebProjects/nedoxff.github.io/static/js -force -recurse\"",
     "dev": "run-p build:watch serve",
     "serve": "http-server -o /demo .",
     "docs": "doctoc ./docs/API.md && api-documenter markdown -i api-extractor -o api-extractor/api-documenter && rm api-extractor/api-documenter/index.md && npm run docs-md-to-html",
@@ -70,6 +71,7 @@
     "@babel/preset-env": "7.24.0",
     "@babel/preset-typescript": "7.23.3",
     "@babel/register": "7.23.7",
+    "@ffmpeg/util": "^0.12.1",
     "@microsoft/api-documenter": "7.23.35",
     "@microsoft/api-extractor": "7.42.2",
     "@rollup/plugin-alias": "5.1.0",
@@ -129,5 +131,8 @@
     "typescript": "5.3.3",
     "url-toolkit": "2.2.5",
     "wrangler": "3.31.0"
+  },
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.10"
   }
 }

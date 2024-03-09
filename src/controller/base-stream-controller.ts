@@ -851,7 +851,12 @@ export default class BaseStreamController
         ),
         keyLoadingPromise,
       ])
-        .then(([fragLoadedData]) => {
+        .then(async ([fragLoadedData]) => {
+          const transcodedData = await this.hls.transcoder.transcode(
+            new Uint8Array(fragLoadedData.payload),
+          );
+          fragLoadedData.payload = transcodedData;
+          fragLoadedData.frag.data = transcodedData;
           if (!dataOnProgress && fragLoadedData && progressCallback) {
             progressCallback(fragLoadedData);
           }

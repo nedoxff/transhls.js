@@ -34,6 +34,7 @@ import type {
   SubtitleSelectionOption,
   VideoSelectionOption,
 } from './types/media-playlist';
+import { TranscoderPluginOptions } from './plugins/transcoder-plugin';
 
 export type ABRControllerConfig = {
   abrEwmaFastLive: number;
@@ -264,6 +265,8 @@ export type TSDemuxerConfig = {
 };
 
 export type HlsConfig = {
+  transcoderPluginOptions: TranscoderPluginOptions;
+
   debug: boolean | ILogger;
   enableWorker: boolean;
   workerPath: null | string;
@@ -333,6 +336,18 @@ const defaultLoadPolicy: LoaderConfig = {
  * shallow the properties are cloned, and we don't end up manipulating the default
  */
 export const hlsDefaultConfig: HlsConfig = {
+  transcoderPluginOptions: {
+    initialEnableAudio: true,
+    initialQuality: 6,
+    initialEnableFallbackVideo: false,
+    fallbackVideoUrl: '',
+    multicore: false,
+    loadFfmpeg: async (_m) => {
+      throw new Error(
+        "transcoderPluginOptions' loadFfmpeg callback must be overriden",
+      );
+    },
+  },
   autoStartLoad: true, // used by stream-controller
   startPosition: -1, // used by stream-controller
   defaultAudioCodec: undefined, // used by stream-controller
